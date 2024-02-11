@@ -1,0 +1,15 @@
+{
+  "name": "dnd-character-sheet-server",
+  "version": "0.0.1",
+  "description": "A nodejs backend for a dnd character sheet",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "cd server && node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
