@@ -13,6 +13,7 @@ class SpellController {
   }
 
   #initialize() {
+    this.#app.get(this.#prefix, this.#getSpell.bind(this))
     this.#app.get(this.#prefix + '/all', this.#getAllSpells.bind(this));
     console.log('[' + colors.colorize('Registered', '' , colors.fg.cyan) + '] ' + colors.colorize(this.#controllerName, '', colors.fg.yellow))
   }
@@ -26,9 +27,10 @@ class SpellController {
     }
     res.status(result.statusCode);
     if (result.isSuccess) {
+      res.type('application/json')
       res.send(JSON.stringify(result.value));
     } else if (result.isFailed) {
-      res.send();
+      res.send(JSON.stringify(result.errors));
     } else {
       res.status(500);
       res.send();

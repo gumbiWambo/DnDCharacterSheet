@@ -1,13 +1,17 @@
 var express = require('express');
-const { SpellController } = require('../conrollers/spell-controller');
 const { colors } = require('../constants/console-colors');
-const { GetAllSpellsQueryHandler } = require('../queries/get-all-spells-query');
+const { Controllers } = require('../conrollers');
+const { Queries } = require('../queries');
+const { Commands } = require('../commands');
+const { Repositories } = require('../repositories');
 
-new GetAllSpellsQueryHandler();
+Repositories.init();
+Queries.init();
+Commands.init();
 
 var app = express();
 
-const spell = new SpellController(app);
+Controllers.init(app);
 
 app.listen(8080, () => {
   const text = colors.colorize('Run', '', colors.fg.green)

@@ -1,7 +1,7 @@
 const { Command } = require("../common/Command");
 const { QueryHandler } = require("../common/QueryHandler");
-const { Result } = require("../common/Result");
 const { Mediator } = require("../mediator/mediator");
+const { SpellRepository } = require("../repositories/spell-repository");
 
 class GetAllSpellsQuery extends Command {
   constructor() {
@@ -10,6 +10,8 @@ class GetAllSpellsQuery extends Command {
 }
 
 class GetAllSpellsQueryHandler extends QueryHandler {
+  #repository = SpellRepository.getRepository();
+  SpellRepository
   constructor() {
     super('GetAllSpellsQuery')
     const mediator = Mediator.getMediator()
@@ -17,8 +19,7 @@ class GetAllSpellsQueryHandler extends QueryHandler {
   }
 
   async Handle(query) {
-    const result = new Result();
-    return Promise.resolve(result.Ok({hello: "hello"}).SetStatusCode(200));
+    return this.#repository.getAllSpells();
   }
 }
 
